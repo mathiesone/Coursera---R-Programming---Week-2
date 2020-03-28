@@ -48,7 +48,7 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
                 FileToOpen2 <- NAFilter[!is.na(NAFilter)]
                 
                 ## Add to the overall list from before
-                overall_list[i] <- mean(FileToOpen2)
+                overall_list <- c(overall_list, FileToOpen2)
                 
         }
         
