@@ -20,18 +20,8 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
         for (i in id) {
                 
                 
-                ## find the length of the id
-                idlen <- nchar(i)
-        
-                if (idlen < 3) {
-                        filename <- addzeros(i)
-                }
-                else {
-                        filename <- i
-                }
-                
                 ## call function to open each file
-                FileToOpen <- openfile(directory, filename)
+                FileToOpen <- openfile(directory, i)
                 
                 ## x <- x[!is.na(x)]
                 
@@ -61,9 +51,22 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
 
 
 openfile <- function(directory, id) {
+        
+        
+        ## find the length of the id
+        idlen <- nchar(id)
+        
+        if (idlen < 3) {
+                filename <- addzeros(id)
+        }
+        else {
+                filename <- id
+        }
+        
+        
         library(readr)
         
-        FileLocationAndName <- paste(directory, id, ".csv", sep="")
+        FileLocationAndName <- paste(directory, "/", filename, ".csv", sep="")
         
         FileToOpen <- read_csv(FileLocationAndName, col_types = cols(col_guess(), col_double(), col_double(), col_double()))
 
